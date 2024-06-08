@@ -1,0 +1,123 @@
+[gd_scene load_steps=15 format=3 uid="uid://b1e1t8v71kkl0"]
+
+[ext_resource type="Texture2D" uid="uid://lbgx8h2eoma2" path="res://assets/player/player2d.png" id="1_l0ibj"]
+[ext_resource type="Script" path="res://scenes/gameboy_game.gd" id="1_yv4ef"]
+[ext_resource type="Texture2D" uid="uid://jwe3hgyldfu1" path="res://assets/player/background.png" id="2_s0lec"]
+[ext_resource type="Material" uid="uid://cp5rfnvbklw8j" path="res://assets/player/scroll.tres" id="2_twtk0"]
+[ext_resource type="Script" path="res://managers/tiny_spawner2D.gd" id="5_lgake"]
+[ext_resource type="PackedScene" uid="uid://61ur8p3o8ifj" path="res://managers/tiny_obstacle.tscn" id="6_yrpxi"]
+[ext_resource type="FontFile" uid="uid://xyk345wiahq4" path="res://assets/fonts/pixel.ttf" id="7_0mkfj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myiss"]
+atlas = ExtResource("1_l0ibj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2mjt"]
+atlas = ExtResource("1_l0ibj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n80vw"]
+atlas = ExtResource("1_l0ibj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_650r2"]
+atlas = ExtResource("1_l0ibj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k0maj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myiss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2mjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n80vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2mjt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_650r2")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3y6x4"]
+size = Vector2(11.5714, 14.5714)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3n8h"]
+size = Vector2(0.857141, 10.5714)
+
+[node name="TinyRunner2D" type="Node2D"]
+script = ExtResource("1_yv4ef")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+offset_right = 470.0
+offset_bottom = 400.0
+color = Color(0.266575, 0.266575, 0.266575, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+material = ExtResource("2_twtk0")
+position = Vector2(234, 185)
+scale = Vector2(7, 7)
+texture = ExtResource("2_s0lec")
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(70, 299)
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_k0maj")
+animation = &"jump"
+
+[node name="PlayerArea" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerArea"]
+position = Vector2(-0.214284, -0.57143)
+shape = SubResource("RectangleShape2D_3y6x4")
+
+[node name="PointsArea" type="Area2D" parent="Player"]
+position = Vector2(0, 18.2857)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PointsArea"]
+position = Vector2(-5, -0.14286)
+shape = SubResource("RectangleShape2D_n3n8h")
+
+[node name="Spawner" type="Marker2D" parent="."]
+position = Vector2(566, 300)
+script = ExtResource("5_lgake")
+chunks = Array[PackedScene]([ExtResource("6_yrpxi")])
+
+[node name="Points" type="Label" parent="."]
+offset_left = 31.0
+offset_top = 22.0
+offset_right = 71.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_0mkfj")
+theme_override_font_sizes/font_size = 70
+text = "0"
+
+[node name="Pause" type="Label" parent="."]
+visible = false
+offset_left = 160.0
+offset_top = 100.0
+offset_right = 308.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_0mkfj")
+theme_override_font_sizes/font_size = 51
+text = "pause"

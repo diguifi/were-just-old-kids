@@ -1,0 +1,53 @@
+[gd_scene load_steps=13 format=3 uid="uid://cbj3sa4higmim"]
+
+[ext_resource type="ArrayMesh" uid="uid://l52lbtnqjt5h" path="res://assets/trees/tree.obj" id="1_jfvx5"]
+[ext_resource type="Shader" path="res://assets/bushes/bush_wind.gdshader" id="2_evwi3"]
+[ext_resource type="Texture2D" uid="uid://bkohv1qjq5s83" path="res://assets/trees/simple_pine_leaves/simple_pin_leaves_albedo.png" id="3_mgf74"]
+[ext_resource type="Texture2D" uid="uid://ctt3orpnvqw7" path="res://assets/trees/simple_pine_leaves/simple_pin_leaves_normal.png" id="4_gpv5b"]
+[ext_resource type="Texture2D" uid="uid://b3j82svml7tsy" path="res://assets/trees/simple_pine_leaves/simple_pin_leaves_orm.png" id="5_snhq3"]
+[ext_resource type="Material" uid="uid://b5wxyxkrs33pc" path="res://assets/trees/simple_bark/simple_bark.tres" id="6_pdqpd"]
+[ext_resource type="Script" path="res://managers/obstacle.gd" id="7_o0h06"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sn0gq"]
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p7o41"]
+seamless = true
+noise = SubResource("FastNoiseLite_sn0gq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ry36w"]
+render_priority = 0
+shader = ExtResource("2_evwi3")
+shader_parameter/wind_noise_sampler = SubResource("NoiseTexture2D_p7o41")
+shader_parameter/albedo_sampler = ExtResource("3_mgf74")
+shader_parameter/orm_sampler = ExtResource("5_snhq3")
+shader_parameter/normal_sampler = ExtResource("4_gpv5b")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_63aby"]
+size = Vector3(1, 2.7558, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y8q31"]
+size = Vector3(0.924591, 0.0934601, 1)
+
+[node name="Tree1Geo" type="MeshInstance3D" groups=["obstacle"]]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = ExtResource("1_jfvx5")
+surface_material_override/0 = SubResource("ShaderMaterial_ry36w")
+surface_material_override/1 = ExtResource("6_pdqpd")
+script = ExtResource("7_o0h06")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0350614, 0.336155, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01266, 0)
+shape = SubResource("BoxShape3D_63aby")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.78384, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0902252, -0.0115891, 0)
+shape = SubResource("BoxShape3D_y8q31")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

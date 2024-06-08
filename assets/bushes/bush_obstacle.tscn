@@ -1,0 +1,50 @@
+[gd_scene load_steps=12 format=3 uid="uid://ce3e4kddknqnx"]
+
+[ext_resource type="Shader" path="res://assets/bushes/bush_wind.gdshader" id="1_ui7vv"]
+[ext_resource type="Texture2D" uid="uid://dap2afqj737q5" path="res://assets/simple_leaves/simple_leaves_albedo.png" id="2_o43q7"]
+[ext_resource type="Texture2D" uid="uid://cu1fm3jggdcgv" path="res://assets/simple_leaves/simple_leaves_normal.png" id="3_nfljx"]
+[ext_resource type="Texture2D" uid="uid://ovrmwwayytuc" path="res://assets/simple_leaves/simple_leaves_orm.png" id="4_306d6"]
+[ext_resource type="ArrayMesh" uid="uid://dbvyvmrfv7b41" path="res://assets/bushes/bush.obj" id="5_cxjh5"]
+[ext_resource type="Script" path="res://managers/obstacle.gd" id="6_r8adn"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rfln0"]
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p2vx3"]
+seamless = true
+noise = SubResource("FastNoiseLite_rfln0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ghrf"]
+render_priority = 0
+shader = ExtResource("1_ui7vv")
+shader_parameter/wind_noise_sampler = SubResource("NoiseTexture2D_p2vx3")
+shader_parameter/albedo_sampler = ExtResource("2_o43q7")
+shader_parameter/orm_sampler = ExtResource("4_306d6")
+shader_parameter/normal_sampler = ExtResource("3_nfljx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w2uvt"]
+size = Vector3(1, 0.671875, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6wa6g"]
+size = Vector3(0.924591, 0.0934601, 1)
+
+[node name="BushObstacle" type="MeshInstance3D" groups=["obstacle"]]
+material_override = SubResource("ShaderMaterial_5ghrf")
+mesh = ExtResource("5_cxjh5")
+script = ExtResource("6_r8adn")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0350614, 0.336155, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0292969, 0)
+shape = SubResource("BoxShape3D_w2uvt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.700875, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0902252, -0.0115891, 0)
+shape = SubResource("BoxShape3D_6wa6g")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

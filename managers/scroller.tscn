@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6a4ksl07pwex"]
+
+[ext_resource type="Script" path="res://managers/scroller.gd" id="1_ja02i"]
+[ext_resource type="PackedScene" uid="uid://bl8og1ghyg2ej" path="res://scenes/road_trip_terrain.tscn" id="2_d0b08"]
+
+[node name="Scroller" type="Node3D"]
+script = ExtResource("1_ja02i")
+
+[node name="Floor1" parent="." instance=ExtResource("2_d0b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+
+[node name="Floor2" parent="." instance=ExtResource("2_d0b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)

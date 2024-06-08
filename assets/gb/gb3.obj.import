@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cipynj3lbonya"
+path="res://.godot/imported/gb3.obj-b65002c3780644557f41f8473477f857.mesh"
+
+[deps]
+
+files=["res://.godot/imported/gb3.obj-b65002c3780644557f41f8473477f857.mesh"]
+
+source_file="res://assets/gb/gb3.obj"
+dest_files=["res://.godot/imported/gb3.obj-b65002c3780644557f41f8473477f857.mesh", "res://.godot/imported/gb3.obj-b65002c3780644557f41f8473477f857.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

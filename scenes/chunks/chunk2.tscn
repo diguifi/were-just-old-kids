@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc8sdjyisukod"]
+
+[ext_resource type="Script" path="res://scenes/chunks/chunk.gd" id="1_6871o"]
+[ext_resource type="PackedScene" uid="uid://ce3e4kddknqnx" path="res://assets/bushes/bush_obstacle.tscn" id="2_cfqme"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ra6am"]
+
+[node name="Chunk1" type="Node3D"]
+script = ExtResource("1_6871o")
+
+[node name="BushObstacle" parent="." instance=ExtResource("2_cfqme")]
+
+[node name="BushObstacle2" parent="." instance=ExtResource("2_cfqme")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.927928, 0, -0.386743)
+
+[node name="BushObstacle3" parent="." instance=ExtResource("2_cfqme")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52129, 0, 0.52814)
+
+[node name="End" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57866, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="End" groups=["end"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="End/Area3D"]
+shape = SubResource("BoxShape3D_ra6am")

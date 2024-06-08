@@ -1,0 +1,20 @@
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://gadqijr66w4l"]
+
+[ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://assets/sky/blue_sky.tres" id="1_a3psq"]
+
+[resource]
+background_mode = 2
+background_color = Color(0.8, 0.913725, 1, 1)
+sky = ExtResource("1_a3psq")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.9
+tonemap_white = 1.2
+ssao_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_sky_affect = 0.0

@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=3 uid="uid://bjajdelekce4l"]
+
+[ext_resource type="Script" path="res://managers/player_3d.gd" id="1_8152i"]
+[ext_resource type="Texture2D" uid="uid://df2b4uoqn1voa" path="res://assets/player/dude_spritesheet.png" id="1_sb5sn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow4i6"]
+atlas = ExtResource("1_sb5sn")
+region = Rect2(25, 25, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkk8l"]
+atlas = ExtResource("1_sb5sn")
+region = Rect2(0, 25, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoq0c"]
+atlas = ExtResource("1_sb5sn")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6nyu"]
+atlas = ExtResource("1_sb5sn")
+region = Rect2(25, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpnoy"]
+atlas = ExtResource("1_sb5sn")
+region = Rect2(50, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0r5fn"]
+atlas = ExtResource("1_sb5sn")
+region = Rect2(75, 0, 25, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_flxpb"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ow4i6")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkk8l")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoq0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6nyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpnoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0r5fn")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fjfga"]
+size = Vector3(0.55, 1.25, 1)
+
+[sub_resource type="Animation" id="Animation_vf5qg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3fuhb"]
+resource_name = "appear"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1.86607, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3w583"]
+_data = {
+"RESET": SubResource("Animation_vf5qg"),
+"appear": SubResource("Animation_3fuhb")
+}
+
+[node name="Player3D" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_8152i")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.05
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_flxpb")
+animation = &"jump"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fjfga")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3w583")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

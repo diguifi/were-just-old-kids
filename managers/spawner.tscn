@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://chq3crm05njme"]
+
+[ext_resource type="Script" path="res://managers/spawner.gd" id="1_p63km"]
+[ext_resource type="PackedScene" uid="uid://chngyij013cve" path="res://scenes/chunks/chunk1.tscn" id="2_e6t6k"]
+[ext_resource type="PackedScene" uid="uid://dc8sdjyisukod" path="res://scenes/chunks/chunk2.tscn" id="3_0vadm"]
+[ext_resource type="PackedScene" uid="uid://bwd4f1bgsqoqi" path="res://scenes/chunks/chunk3.tscn" id="4_4xnut"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypwtb"]
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_p63km")
+chunks = Array[PackedScene]([ExtResource("2_e6t6k"), ExtResource("3_0vadm"), ExtResource("4_4xnut")])
+
+[node name="End" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="End" groups=["end"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="End/Area3D"]
+shape = SubResource("BoxShape3D_ypwtb")
+
+[connection signal="area_entered" from="End/Area3D" to="." method="_on_area_3d_area_entered"]

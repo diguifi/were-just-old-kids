@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpligdf5hvqla"]
+
+[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_f66d8"]
+[ext_resource type="Environment" uid="uid://gadqijr66w4l" path="res://world_env.tres" id="2_me8cy"]
+[ext_resource type="PackedScene" uid="uid://b6a4ksl07pwex" path="res://managers/scroller.tscn" id="3_nqbbo"]
+[ext_resource type="ArrayMesh" uid="uid://65xmyo2lo8xk" path="res://assets/car/car.obj" id="4_nppmv"]
+[ext_resource type="PackedScene" uid="uid://bc01ksxbgshx2" path="res://managers/game_boy.tscn" id="5_slan8"]
+[ext_resource type="PackedScene" uid="uid://cjwnmg23wrxmw" path="res://managers/bg_scroller.tscn" id="7_h8mps"]
+[ext_resource type="PackedScene" uid="uid://bjajdelekce4l" path="res://managers/player_3d.tscn" id="8_bjku4"]
+[ext_resource type="PackedScene" uid="uid://chq3crm05njme" path="res://managers/spawner.tscn" id="9_pfc38"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0q0n6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0y5tn"]
+
+[node name="RoadTrip" type="Node3D"]
+
+[node name="Character" parent="." instance=ExtResource("1_f66d8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -0.166619)
+immobile = true
+limit_neg_x = -120
+limit_pos_y = 90
+limit_neg_y = -30
+jumping_enabled = false
+gravity_enabled = false
+reticle_enabled = false
+
+[node name="Scroller" parent="." instance=ExtResource("3_nqbbo")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_me8cy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(1, 0.952941, 0.929412, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Car" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.811, 0.428, 1.51)
+mesh = ExtResource("4_nppmv")
+
+[node name="Roof" type="MeshInstance3D" parent="Car"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.41227, 2.55036, -0.476949)
+mesh = SubResource("PlaneMesh_0q0n6")
+skeleton = NodePath("../..")
+
+[node name="GameBoy" parent="." instance=ExtResource("5_slan8")]
+
+[node name="ScrollingSpriteBg" parent="." instance=ExtResource("7_h8mps")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 21, 2, -57)
+
+[node name="ScrollingSpriteBg2" parent="." instance=ExtResource("7_h8mps")]
+transform = Transform3D(-5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 21, -7, 196.184)
+
+[node name="Player3D" parent="." instance=ExtResource("8_bjku4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70842, 1.46449, -3.42551)
+
+[node name="Chao" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70934, -0.50137, -3.38463)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chao"]
+shape = SubResource("BoxShape3D_0y5tn")
+
+[node name="Spawner" parent="." instance=ExtResource("9_pfc38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.874, 0, -3.427)

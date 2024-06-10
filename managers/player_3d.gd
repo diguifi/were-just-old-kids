@@ -15,6 +15,7 @@ var alive = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.on_road_trip = true
 	visible = false
 	starting_x = global_transform.origin.x
 	sprite_anim.play("walk")

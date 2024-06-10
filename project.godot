@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Growing"
-run/main_scene="res://scenes/road_trip.tscn"
+config/name="Still Growing"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

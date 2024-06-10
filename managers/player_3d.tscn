@@ -3,29 +3,29 @@
 [ext_resource type="Script" path="res://managers/player_3d.gd" id="1_8152i"]
 [ext_resource type="Texture2D" uid="uid://df2b4uoqn1voa" path="res://assets/player/dude_spritesheet.png" id="1_sb5sn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ow4i6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa1b4"]
 atlas = ExtResource("1_sb5sn")
-region = Rect2(25, 25, 25, 25)
+region = Rect2(25, 27, 25, 27)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gkk8l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqomt"]
 atlas = ExtResource("1_sb5sn")
-region = Rect2(0, 25, 25, 25)
+region = Rect2(0, 27, 25, 27)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qoq0c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7112q"]
 atlas = ExtResource("1_sb5sn")
-region = Rect2(0, 0, 25, 25)
+region = Rect2(0, 0, 25, 27)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i6nyu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qilp"]
 atlas = ExtResource("1_sb5sn")
-region = Rect2(25, 0, 25, 25)
+region = Rect2(25, 0, 25, 27)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wpnoy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5un3h"]
 atlas = ExtResource("1_sb5sn")
-region = Rect2(50, 0, 25, 25)
+region = Rect2(50, 0, 25, 27)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0r5fn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg56a"]
 atlas = ExtResource("1_sb5sn")
-region = Rect2(75, 0, 25, 25)
+region = Rect2(75, 0, 25, 27)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_flxpb"]
 animations = [{
@@ -36,7 +36,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ow4i6")
+"texture": SubResource("AtlasTexture_xa1b4")
 }],
 "loop": true,
 "name": &"hurt",
@@ -44,7 +44,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gkk8l")
+"texture": SubResource("AtlasTexture_kqomt")
 }],
 "loop": true,
 "name": &"jump",
@@ -52,16 +52,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qoq0c")
+"texture": SubResource("AtlasTexture_7112q")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i6nyu")
+"texture": SubResource("AtlasTexture_8qilp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wpnoy")
+"texture": SubResource("AtlasTexture_5un3h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0r5fn")
+"texture": SubResource("AtlasTexture_rg56a")
 }],
 "loop": true,
 "name": &"walk",
@@ -69,7 +69,7 @@ animations = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fjfga"]
-size = Vector3(0.55, 1.25, 1)
+size = Vector3(0.55, 1.29199, 1)
 
 [sub_resource type="Animation" id="Animation_vf5qg"]
 length = 0.001
@@ -115,9 +115,10 @@ script = ExtResource("1_8152i")
 pixel_size = 0.05
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_flxpb")
-animation = &"jump"
+animation = &"hurt"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0209961, 0)
 shape = SubResource("BoxShape3D_fjfga")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -64,11 +64,12 @@ func handle_pause(delta):
 		sprite.pause()
 
 func hurt():
-	if points - points_step >= 0:
-		points -= points_step
-		points_label.text = str(points)
-	hurt_count = 0
-	is_hurt = true
+	if !is_hurt:
+		if points - points_step >= 0:
+			points -= points_step
+			points_label.text = str(points)
+		hurt_count = 0
+		is_hurt = true
 
 func add_points():
 	points += points_step

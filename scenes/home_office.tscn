@@ -1,13 +1,31 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqlj4yqc6axnk"]
+[gd_scene load_steps=37 format=3 uid="uid://bqlj4yqc6axnk"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_i7crv"]
 [ext_resource type="Environment" uid="uid://gadqijr66w4l" path="res://world_env.tres" id="2_pf2gs"]
+[ext_resource type="Texture2D" uid="uid://boh0a208mn6b4" path="res://assets/computer/frame_000_delay-0.06s.jpg" id="3_7hl61"]
+[ext_resource type="Texture2D" uid="uid://daufyxufdpwgv" path="res://assets/computer/frame_002_delay-0.06s.jpg" id="4_hbkwg"]
+[ext_resource type="Texture2D" uid="uid://dtc38l0jv45y0" path="res://assets/computer/frame_045_delay-0.06s.jpg" id="5_qke4y"]
+[ext_resource type="Texture2D" uid="uid://rjmikk3hjwcv" path="res://assets/computer/frame_047_delay-0.07s.jpg" id="6_cbe3o"]
+[ext_resource type="Texture2D" uid="uid://clwda1oqnji11" path="res://assets/computer/frame_071_delay-0.06s.jpg" id="7_vd2qf"]
+[ext_resource type="Texture2D" uid="uid://20ognujup1nx" path="res://assets/computer/frame_072_delay-0.06s.jpg" id="8_3wsyx"]
+[ext_resource type="Texture2D" uid="uid://b6rjkv70gxt5i" path="res://assets/computer/frame_130_delay-0.06s.jpg" id="9_rg513"]
+[ext_resource type="Script" path="res://assets/computer/code.gd" id="10_0honr"]
+[ext_resource type="Texture2D" uid="uid://bxkf45lp8mxvp" path="res://assets/computer/teams.jpg" id="10_qwa42"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wq5w7"]
 size = Vector2(8, 8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6etmq"]
 size = Vector3(14.9164, 0.495117, 11.8764)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_366sa"]
+size = Vector3(3.38135, 0.901382, 5.20129)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6nxp4"]
+size = Vector3(5.13867, 0.506714, 6.02612)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_un2fg"]
+size = Vector3(3.31561, 0.500488, 4.97235)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_oh5rt"]
 size = Vector2(5, 2)
@@ -21,11 +39,93 @@ size = Vector3(1, 5, 1.3)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4g8k8"]
 albedo_color = Color(0.478431, 0.239216, 0, 0.588235)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_l25dy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8bnh"]
+albedo_color = Color(0.299056, 0.13718, 2.40654e-08, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gt6xs"]
+size = Vector3(1, 1.19281, 1.98853)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qgl6n"]
+size = Vector2(0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mgbdq"]
+albedo_color = Color(0.114897, 0.114897, 0.114897, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jri28"]
+atlas = ExtResource("3_7hl61")
+region = Rect2(0, 0, 476, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn02v"]
+atlas = ExtResource("4_hbkwg")
+region = Rect2(0, 0, 476, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlhhf"]
+atlas = ExtResource("5_qke4y")
+region = Rect2(0, 0, 476, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trdjl"]
+atlas = ExtResource("6_cbe3o")
+region = Rect2(0, 0, 476, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_roev6"]
+atlas = ExtResource("7_vd2qf")
+region = Rect2(0, 0, 476, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d4s8"]
+atlas = ExtResource("8_3wsyx")
+region = Rect2(0, 0, 476, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k73f"]
+atlas = ExtResource("9_rg513")
+region = Rect2(0, 0, 476, 255)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0iqhu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jri28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn02v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlhhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trdjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_roev6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d4s8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k73f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hwl20"]
+size = Vector2(0.25, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvuem"]
+albedo_color = Color(0.111197, 0.111197, 0.111197, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x8nua"]
+albedo_color = Color(0.111197, 0.111197, 0.111197, 1)
+
 [node name="HomeOffice" type="Node3D"]
 
 [node name="Character" parent="." instance=ExtResource("1_i7crv")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.28732, 0, 0.197797)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.28732, 0, 0.566107)
+acceleration = 5.0
 jumping_enabled = false
+sprint_enabled = false
 crouch_enabled = false
 reticle_enabled = false
 
@@ -58,16 +158,34 @@ shape = SubResource("BoxShape3D_6etmq")
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.45868, 1.37747, 1.37622)
 mesh = SubResource("PlaneMesh_wq5w7")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Apartment/Wall1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apartment/Wall1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0324707, -0.0493088, -1.45453)
+shape = SubResource("BoxShape3D_366sa")
+
 [node name="Wall2" type="MeshInstance3D" parent="Apartment"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0.035437, 1.37747, 2.32331)
 mesh = SubResource("PlaneMesh_wq5w7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Apartment/Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apartment/Wall2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.985352, -0.246644, 0.319214)
+shape = SubResource("BoxShape3D_6nxp4")
 
 [node name="Wall3" type="MeshInstance3D" parent="Apartment"]
 transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, 2.33752, 1.37747, 1.48775)
 mesh = SubResource("PlaneMesh_wq5w7")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Apartment/Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apartment/Wall3/StaticBody3D"]
+transform = Transform3D(1, -3.34075e-22, 0, -3.34075e-22, 1, 0, 0, 0, 1, -0.0638733, -0.249757, 1.56161)
+shape = SubResource("BoxShape3D_un2fg")
+
 [node name="WallWindow1" type="MeshInstance3D" parent="Apartment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0611131, -2.46026)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0104418, -2.46026)
 mesh = SubResource("PlaneMesh_oh5rt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Apartment/WallWindow1"]
@@ -93,3 +211,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79999, 0.05108, 1.55336)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_qysay")
 surface_material_override/0 = SubResource("StandardMaterial3D_4g8k8")
+
+[node name="Desk" type="Node" parent="."]
+
+[node name="DeskMesh" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59853, 0.897438, 0.432355)
+mesh = SubResource("PlaneMesh_l25dy")
+surface_material_override/0 = SubResource("StandardMaterial3D_o8bnh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Desk/DeskMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Desk/DeskMesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.582855, 0.000610352)
+shape = SubResource("BoxShape3D_gt6xs")
+
+[node name="Monitor1" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(-4.11786e-08, 0.942057, 0.335452, -1, -4.37114e-08, 0, 1.46631e-08, -0.335452, 0.942057, -2.06839, 1.3463, 0.785921)
+mesh = SubResource("PlaneMesh_qgl6n")
+surface_material_override/0 = SubResource("StandardMaterial3D_mgbdq")
+
+[node name="Code" type="AnimatedSprite3D" parent="Desk/Monitor1"]
+transform = Transform3D(-4.37114e-08, -0.9, -4.37114e-08, 0, -3.93403e-08, 1, -1, 3.93403e-08, 1.91069e-15, -0.00157261, 0.000760078, -0.000746727)
+pixel_size = 0.002
+sprite_frames = SubResource("SpriteFrames_0iqhu")
+frame_progress = 0.501268
+script = ExtResource("10_0honr")
+
+[node name="Monitor2" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(-3.7663e-08, 0.861629, -0.507538, -1, -4.37114e-08, 0, -2.21852e-08, 0.507538, 0.861629, -2.10166, 1.21284, -0.118542)
+mesh = SubResource("PlaneMesh_hwl20")
+surface_material_override/0 = SubResource("StandardMaterial3D_xvuem")
+
+[node name="Keyboard" type="MeshInstance3D" parent="Desk/Monitor2"]
+transform = Transform3D(0.372551, -0.928012, 0, 0.928012, 0.372551, 0, 0, 0, 1, 0.165196, 0.112778, 0)
+mesh = SubResource("PlaneMesh_hwl20")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8nua")
+
+[node name="Sprite3D" type="Sprite3D" parent="Desk/Monitor2"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 3.55271e-15, 1, -1, 4.37114e-08, -4.37114e-08, 0, 0.00101137, 0)
+pixel_size = 0.001
+double_sided = false
+no_depth_test = true
+texture = ExtResource("10_qwa42")

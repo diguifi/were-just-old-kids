@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjajdelekce4l"]
+[gd_scene load_steps=16 format=3 uid="uid://bjajdelekce4l"]
 
 [ext_resource type="Script" path="res://managers/player_3d.gd" id="1_8152i"]
 [ext_resource type="Texture2D" uid="uid://df2b4uoqn1voa" path="res://assets/player/dude_spritesheet.png" id="1_sb5sn"]
+[ext_resource type="AudioStream" uid="uid://i1eg26dl1jqs" path="res://assets/sfx/Jump.wav" id="3_1nhig"]
+[ext_resource type="AudioStream" uid="uid://cdda1ann6ahfb" path="res://assets/sfx/Bump.wav" id="4_gmlxw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xa1b4"]
 atlas = ExtResource("1_sb5sn")
@@ -125,5 +127,13 @@ shape = SubResource("BoxShape3D_fjfga")
 libraries = {
 "": SubResource("AnimationLibrary_3w583")
 }
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_1nhig")
+volume_db = -23.0
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_gmlxw")
+volume_db = -23.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

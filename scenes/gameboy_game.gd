@@ -4,6 +4,8 @@ extends Node2D
 @onready var brackground = $Background
 @onready var points_label = $Points
 @onready var pause_label = $Pause
+@onready var jump_sound = $Jump
+@onready var hurt_sound = $Hurt
 var jumping = false
 var jump_time = 0
 var max_jump_time = 0.6
@@ -30,6 +32,7 @@ func _process(delta):
 
 func handle_jumping(delta):
 	if Input.is_action_just_pressed("ui_accept") and !jumping:
+		jump_sound.play()
 		jumping = true
 		sprite.transform.origin.y -= height
 	if jumping:
@@ -68,6 +71,7 @@ func hurt():
 		if points - points_step >= 0:
 			points -= points_step
 			points_label.text = str(points)
+		hurt_sound.play()
 		hurt_count = 0
 		is_hurt = true
 

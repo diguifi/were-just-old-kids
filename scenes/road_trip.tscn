@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpligdf5hvqla"]
+[gd_scene load_steps=12 format=3 uid="uid://dpligdf5hvqla"]
 
+[ext_resource type="Script" path="res://scenes/road_trip.gd" id="1_8ny2n"]
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_f66d8"]
 [ext_resource type="Environment" uid="uid://gadqijr66w4l" path="res://world_env.tres" id="2_me8cy"]
 [ext_resource type="PackedScene" uid="uid://b6a4ksl07pwex" path="res://managers/scroller.tscn" id="3_nqbbo"]
@@ -14,6 +15,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0y5tn"]
 
 [node name="RoadTrip" type="Node3D"]
+script = ExtResource("1_8ny2n")
 
 [node name="Character" parent="." instance=ExtResource("1_f66d8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -0.166619)
@@ -22,6 +24,7 @@ limit_neg_x = -120
 limit_pos_y = 90
 limit_neg_y = -30
 jumping_enabled = false
+crouch_enabled = false
 gravity_enabled = false
 reticle_enabled = false
 

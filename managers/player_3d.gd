@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 @onready var sprite_anim = $AnimatedSprite3D
 @onready var animation = $AnimationPlayer
+@onready var jump_audio = $Jump
+@onready var hurt_audio = $Hurt
 @export var jump_velocity : float = 6
 @export var hurt_time = 1.5
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -13,9 +15,7 @@ var just_released = false
 var just_appeared = false
 var alive = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	Globals.on_road_trip = true
 	visible = false
 	starting_x = global_transform.origin.x
 	sprite_anim.play("walk")
@@ -43,6 +43,8 @@ func handle_birth():
 
 func handle_jumping():
 	if Input.is_action_pressed("ui_accept") and is_on_floor():
+		if alive:
+			jump_audio.play()
 		sprite_anim.play("jump")
 		velocity.y += jump_velocity
 		
@@ -69,6 +71,8 @@ func hurt():
 		hurt_count = 0
 		is_hurt = true
 		sprite_anim.play("hurt")
+		hurt_audio.play()
 
 func _on_animation_player_animation_finished(anim_name):
-	alive = true
+	if anim_name == 'appear':
+		alive = true

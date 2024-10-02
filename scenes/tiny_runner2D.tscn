@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1e1t8v71kkl0"]
+[gd_scene load_steps=17 format=3 uid="uid://b1e1t8v71kkl0"]
 
 [ext_resource type="Texture2D" uid="uid://lbgx8h2eoma2" path="res://assets/player/player2d.png" id="1_l0ibj"]
 [ext_resource type="Script" path="res://scenes/gameboy_game.gd" id="1_yv4ef"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://managers/tiny_spawner2D.gd" id="5_lgake"]
 [ext_resource type="PackedScene" uid="uid://61ur8p3o8ifj" path="res://managers/tiny_obstacle.tscn" id="6_yrpxi"]
 [ext_resource type="FontFile" uid="uid://xyk345wiahq4" path="res://assets/fonts/pixel.ttf" id="7_0mkfj"]
+[ext_resource type="AudioStream" uid="uid://i1eg26dl1jqs" path="res://assets/sfx/Jump.wav" id="8_j80gl"]
+[ext_resource type="AudioStream" uid="uid://cdda1ann6ahfb" path="res://assets/sfx/Bump.wav" id="9_ucq0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_myiss"]
 atlas = ExtResource("1_l0ibj")
@@ -121,3 +123,11 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_0mkfj")
 theme_override_font_sizes/font_size = 51
 text = "pause"
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_j80gl")
+volume_db = -15.0
+
+[node name="Hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ucq0r")
+volume_db = -15.0

@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqlj4yqc6axnk"]
+
+[ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_i7crv"]
+[ext_resource type="Environment" uid="uid://gadqijr66w4l" path="res://world_env.tres" id="2_pf2gs"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wq5w7"]
+size = Vector2(8, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6etmq"]
+size = Vector3(14.9164, 0.495117, 11.8764)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oh5rt"]
+size = Vector2(5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3chv"]
+size = Vector3(4.73169, 0.490723, 1.47607)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qysay"]
+size = Vector3(1, 5, 1.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4g8k8"]
+albedo_color = Color(0.478431, 0.239216, 0, 0.588235)
+
+[node name="HomeOffice" type="Node3D"]
+
+[node name="Character" parent="." instance=ExtResource("1_i7crv")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.28732, 0, 0.197797)
+jumping_enabled = false
+crouch_enabled = false
+reticle_enabled = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_pf2gs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(1, 0.952941, 0.929412, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Apartment" type="Node" parent="."]
+
+[node name="Roof" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3.02658, 1.50611)
+mesh = SubResource("PlaneMesh_wq5w7")
+
+[node name="Floor" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0210783, 1.09167)
+mesh = SubResource("PlaneMesh_wq5w7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Apartment/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apartment/Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0274048, -0.252441, 1.9137)
+shape = SubResource("BoxShape3D_6etmq")
+
+[node name="Wall1" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.45868, 1.37747, 1.37622)
+mesh = SubResource("PlaneMesh_wq5w7")
+
+[node name="Wall2" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0.035437, 1.37747, 2.32331)
+mesh = SubResource("PlaneMesh_wq5w7")
+
+[node name="Wall3" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, 2.33752, 1.37747, 1.48775)
+mesh = SubResource("PlaneMesh_wq5w7")
+
+[node name="WallWindow1" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0611131, -2.46026)
+mesh = SubResource("PlaneMesh_oh5rt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Apartment/WallWindow1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apartment/WallWindow1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118286, -0.254639, -0.238037)
+shape = SubResource("BoxShape3D_i3chv")
+
+[node name="WallWindow2" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.51832, -2.46026)
+mesh = SubResource("PlaneMesh_oh5rt")
+
+[node name="WallWindow3" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 2.1384, 1.71948, -2.46026)
+mesh = SubResource("PlaneMesh_oh5rt")
+
+[node name="WallWindow4" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -2.32071, 1.71948, -2.46026)
+mesh = SubResource("PlaneMesh_oh5rt")
+
+[node name="Door" type="MeshInstance3D" parent="Apartment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79999, 0.05108, 1.55336)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_qysay")
+surface_material_override/0 = SubResource("StandardMaterial3D_4g8k8")

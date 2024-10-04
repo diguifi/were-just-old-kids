@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2sadhxrldf42"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8kf2q"]
+size = Vector3(7, 5, 8)
+
+[sub_resource type="PrismMesh" id="PrismMesh_hvlrw"]
+size = Vector3(9, 2, 8)
+
+[node name="House" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.7964, -22.6004, -75.9202)
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0979538, 0.3894, -0.0879059)
+mesh = SubResource("BoxMesh_8kf2q")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.427299, 3.73946, -0.132584)
+mesh = SubResource("PrismMesh_hvlrw")
+skeleton = NodePath("../..")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=52 format=3 uid="uid://bqlj4yqc6axnk"]
+[gd_scene load_steps=57 format=3 uid="uid://bqlj4yqc6axnk"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_i7crv"]
 [ext_resource type="Environment" uid="uid://gadqijr66w4l" path="res://world_env.tres" id="2_pf2gs"]
 [ext_resource type="Texture2D" uid="uid://boh0a208mn6b4" path="res://assets/computer/frame_000_delay-0.06s.jpg" id="3_7hl61"]
+[ext_resource type="Script" path="res://managers/area_3d_apartment_view.gd" id="3_87xcx"]
 [ext_resource type="Texture2D" uid="uid://daufyxufdpwgv" path="res://assets/computer/frame_002_delay-0.06s.jpg" id="4_hbkwg"]
 [ext_resource type="Texture2D" uid="uid://dtc38l0jv45y0" path="res://assets/computer/frame_045_delay-0.06s.jpg" id="5_qke4y"]
 [ext_resource type="Texture2D" uid="uid://rjmikk3hjwcv" path="res://assets/computer/frame_047_delay-0.07s.jpg" id="6_cbe3o"]
@@ -13,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bxkf45lp8mxvp" path="res://assets/computer/teams.jpg" id="10_qwa42"]
 [ext_resource type="PackedScene" uid="uid://d2sadhxrldf42" path="res://scenes/house.tscn" id="12_6iqs6"]
 [ext_resource type="PackedScene" uid="uid://b5xm5psk8wcmx" path="res://assets/trees/old_trees/tree.tscn" id="13_fp03l"]
+[ext_resource type="PackedScene" uid="uid://cttk3thaj5c8b" path="res://managers/player_3d_city.tscn" id="14_yw07n"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wq5w7"]
 size = Vector2(8, 8)
@@ -40,6 +42,9 @@ size = Vector3(1, 5, 1.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4g8k8"]
 albedo_color = Color(0.478431, 0.239216, 0, 0.588235)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xtn4o"]
+size = Vector3(2.86164, 1, 1.01135)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_l25dy"]
 
@@ -160,11 +165,18 @@ albedo_color = Color(0.361926, 1, 0.346234, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_0fa62"]
 size = Vector2(5, 100)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qy45j"]
+size = Vector3(18.1571, 1.30774, 23.2349)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5dd3h"]
+size = Vector3(21.4922, 14.937, 27.3844)
+
 [node name="HomeOffice" type="Node3D"]
 
 [node name="Character" parent="." instance=ExtResource("1_i7crv")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.37833, 0, 0.383775)
 acceleration = 5.0
+city_level = true
 jumping_enabled = false
 sprint_enabled = false
 crouch_enabled = false
@@ -252,6 +264,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79999, 0.05108, 1.55336)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_qysay")
 surface_material_override/0 = SubResource("StandardMaterial3D_4g8k8")
+
+[node name="Area3DApartmentView" type="Area3D" parent="Apartment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.4428)
+script = ExtResource("3_87xcx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Apartment/Area3DApartmentView"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0322208, 0, 0.00567627)
+shape = SubResource("BoxShape3D_xtn4o")
+
+[node name="Marker3D" type="Marker3D" parent="Apartment/Area3DApartmentView"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.562282, 0, 0.295595)
 
 [node name="Desk" type="Node" parent="."]
 
@@ -508,7 +531,30 @@ transform = Transform3D(0.40771, 0, 0.537957, 0, 0.675, 0, -0.537957, 0, 0.40771
 transform = Transform3D(0.86741, 0, 0.497595, 0, 1, 0, -0.497595, 0, 0.86741, 42.8671, -17.1665, -34.7569)
 
 [node name="Tree5" parent="City" instance=ExtResource("13_fp03l")]
-transform = Transform3D(-0.175539, 0, -0.984473, 0, 1, 0, 0.984473, 0, -0.175539, 42.8671, -17.6947, -23.1942)
+transform = Transform3D(-0.227977, 0, -1.27985, 0, 1.5, 0, 1.27985, 0, -0.227977, 42.8671, -17.6947, -23.1942)
 
 [node name="Tree6" parent="City" instance=ExtResource("13_fp03l")]
 transform = Transform3D(1.17375, 0, -0.17318, 0, 1.315, 0, 0.162872, 0, 1.24804, 42.8671, -17.442, -16.0516)
+
+[node name="CityMap" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CityMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -114.194, 3.83163, -62.0168)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CityMap/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8056, 0.15387, -4.59697)
+shape = SubResource("BoxShape3D_qy45j")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="CityMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.221, 8.36576, -86.4311)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CityMap/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65372, -6.85034, -0.0443115)
+shape = SubResource("BoxShape3D_5dd3h")
+
+[node name="Player3DCity" parent="." instance=ExtResource("14_yw07n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115.425, 23.9741, -60.5514)
+player_path = NodePath("../Character")
+
+[connection signal="body_entered" from="Apartment/Area3DApartmentView" to="Apartment/Area3DApartmentView" method="_on_body_entered"]
+[connection signal="body_exited" from="Apartment/Area3DApartmentView" to="Apartment/Area3DApartmentView" method="_on_body_exited"]

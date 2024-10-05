@@ -43,6 +43,7 @@ extends CharacterBody3D
 #@export var LOOK_DOWN : String
 
 @export_group("Feature Settings")
+@export var city_level : bool = false
 @export var jumping_enabled : bool = true
 @export var in_air_momentum : bool = true
 @export var motion_smoothing : bool = true
@@ -146,7 +147,10 @@ func _physics_process(delta):
 	
 	var input_dir = Vector2.ZERO
 	if !immobile:
-		input_dir = Input.get_vector(LEFT, RIGHT, FORWARD, BACKWARD)
+		if city_level and Globals.looking_at_city:
+			input_dir = Input.get_vector("none", "none", FORWARD, BACKWARD)
+		else:
+			input_dir = Input.get_vector(LEFT, RIGHT, FORWARD, BACKWARD)
 	handle_movement(delta, input_dir)
 	
 	low_ceiling = $CrouchCeilingDetection.is_colliding()

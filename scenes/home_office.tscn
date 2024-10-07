@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bqlj4yqc6axnk"]
+[gd_scene load_steps=59 format=3 uid="uid://bqlj4yqc6axnk"]
 
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_i7crv"]
 [ext_resource type="Environment" uid="uid://gadqijr66w4l" path="res://world_env.tres" id="2_pf2gs"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d2sadhxrldf42" path="res://scenes/house.tscn" id="12_6iqs6"]
 [ext_resource type="PackedScene" uid="uid://b5xm5psk8wcmx" path="res://assets/trees/old_trees/tree.tscn" id="13_fp03l"]
 [ext_resource type="PackedScene" uid="uid://cttk3thaj5c8b" path="res://managers/player_3d_city.tscn" id="14_yw07n"]
+[ext_resource type="Script" path="res://managers/death_plane.gd" id="16_h7jxc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wq5w7"]
 size = Vector2(8, 8)
@@ -170,6 +171,9 @@ size = Vector3(18.1571, 1.30774, 23.2349)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5dd3h"]
 size = Vector3(21.4922, 14.937, 27.3844)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_koesa"]
+size = Vector3(357.234, 103.704, 271.277)
 
 [node name="HomeOffice" type="Node3D"]
 
@@ -556,5 +560,14 @@ shape = SubResource("BoxShape3D_5dd3h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115.425, 23.9741, -60.5514)
 player_path = NodePath("../Character")
 
+[node name="DeathPlane" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.2802, -24.8324, -106.979)
+script = ExtResource("16_h7jxc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0028, -51.3518, 13.9595)
+shape = SubResource("BoxShape3D_koesa")
+
 [connection signal="body_entered" from="Apartment/Area3DApartmentView" to="Apartment/Area3DApartmentView" method="_on_body_entered"]
 [connection signal="body_exited" from="Apartment/Area3DApartmentView" to="Apartment/Area3DApartmentView" method="_on_body_exited"]
+[connection signal="body_entered" from="DeathPlane" to="DeathPlane" method="_on_body_entered"]

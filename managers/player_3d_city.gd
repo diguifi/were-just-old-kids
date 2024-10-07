@@ -1,12 +1,18 @@
 extends CharacterBody3D
 
 @export_node_path("CharacterBody3D") var player_path
+@onready var anim = $AnimatedSprite3D
 var distance_to_player = 1
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var current_jump_velocity = 4.5
 var current_speed = 5.0
+var initial_position
+
+func _ready() -> void:
+	anim.play("default")
+	initial_position = position
 
 func _physics_process(delta: float) -> void:
 	if player_path:
@@ -21,6 +27,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		anim.play("jump")
 		velocity.y = current_jump_velocity
 
 	# Get the input direction and handle the movement/deceleration.
@@ -28,9 +35,13 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("ui_left", "ui_right", "none", "none")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		if !Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			anim.play("walk")
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
 	else:
+		if !Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			anim.play("default")
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
@@ -50,3 +61,6 @@ func calculate_jump():
 	
 func calculate_speed():
 	current_speed = SPEED * (distance_to_player/20)
+
+func died():
+	position = initial_position

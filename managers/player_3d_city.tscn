@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cttk3thaj5c8b"]
+[gd_scene load_steps=15 format=3 uid="uid://cttk3thaj5c8b"]
 
 [ext_resource type="Script" path="res://managers/player_3d_city.gd" id="1_7cgat"]
 [ext_resource type="Texture2D" uid="uid://df2b4uoqn1voa" path="res://assets/player/dude_spritesheet.png" id="1_62mht"]
@@ -78,6 +78,43 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_upbhf"]
 size = Vector3(0.55, 1.29199, 1)
 
+[sub_resource type="Animation" id="Animation_vf5qg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3fuhb"]
+resource_name = "appear"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1.86607, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3w583"]
+_data = {
+"RESET": SubResource("Animation_vf5qg"),
+"appear": SubResource("Animation_3fuhb")
+}
+
 [node name="Player3DCity" type="CharacterBody3D"]
 script = ExtResource("1_7cgat")
 
@@ -92,3 +129,10 @@ frame_progress = 0.655182
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0209961, 0)
 shape = SubResource("BoxShape3D_upbhf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3w583")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

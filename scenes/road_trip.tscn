@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpligdf5hvqla"]
+[gd_scene load_steps=13 format=3 uid="uid://dpligdf5hvqla"]
 
 [ext_resource type="Script" path="res://scenes/road_trip.gd" id="1_8ny2n"]
 [ext_resource type="PackedScene" uid="uid://cc1m2a1obsyn4" path="res://addons/fpc/character.tscn" id="1_f66d8"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cjwnmg23wrxmw" path="res://managers/bg_scroller.tscn" id="7_h8mps"]
 [ext_resource type="PackedScene" uid="uid://bjajdelekce4l" path="res://managers/player_3d.tscn" id="8_bjku4"]
 [ext_resource type="PackedScene" uid="uid://chq3crm05njme" path="res://managers/spawner.tscn" id="9_pfc38"]
+[ext_resource type="AudioStream" uid="uid://chfvngws8gbve" path="res://assets/sfx/keyboard.wav" id="10_quudc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0q0n6"]
 
@@ -67,3 +68,6 @@ shape = SubResource("BoxShape3D_0y5tn")
 
 [node name="Spawner" parent="." instance=ExtResource("9_pfc38")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.874, 0, -3.427)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_quudc")

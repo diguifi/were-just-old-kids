@@ -21,10 +21,10 @@ text = "A feeling by Diguifi"
 
 [node name="Label2" type="Label" parent="."]
 visible = false
-offset_left = 464.0
 offset_top = 300.0
-offset_right = 690.0
+offset_right = 1153.0
 offset_bottom = 346.0
 theme_override_fonts/font = ExtResource("1_rvq2l")
 theme_override_font_sizes/font_size = 41
-text = "Still Growing"
+text = "We're just old kids"
+horizontal_alignment = 1

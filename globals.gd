@@ -6,3 +6,4 @@ var sprite_visible = false
 var looking_at_gb = true
 var looking_at_city = false
 var alcancou_vista = false
+var goal

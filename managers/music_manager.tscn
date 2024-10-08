@@ -1,0 +1,157 @@
+[gd_scene load_steps=12 format=3 uid="uid://drt2ivbk6vpwg"]
+
+[ext_resource type="Script" path="res://managers/music_manager.gd" id="1_mvd2s"]
+[ext_resource type="AudioStream" uid="uid://b1f0wtfr35ob7" path="res://assets/sfx/base_music2.wav" id="2_bd2hb"]
+[ext_resource type="AudioStream" uid="uid://beosk8tub7s66" path="res://assets/sfx/happy_music2.wav" id="3_ydg3y"]
+[ext_resource type="AudioStream" uid="uid://bavo331nky60u" path="res://assets/sfx/intro.wav" id="4_cctv5"]
+
+[sub_resource type="Animation" id="Animation_501dx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HappyMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Intro:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-15.0]
+}
+
+[sub_resource type="Animation" id="Animation_4jjtb"]
+resource_name = "fade_in_base"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -15.0]
+}
+
+[sub_resource type="Animation" id="Animation_3hmd4"]
+resource_name = "fade_in_happy"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HappyMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -15.0]
+}
+
+[sub_resource type="Animation" id="Animation_nccft"]
+resource_name = "fade_out_base"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-15.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_t7fgk"]
+resource_name = "fade_out_happy"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HappyMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-15.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_yx444"]
+resource_name = "fade_out_intro"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Intro:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-15.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_igucl"]
+_data = {
+"RESET": SubResource("Animation_501dx"),
+"fade_in_base": SubResource("Animation_4jjtb"),
+"fade_in_happy": SubResource("Animation_3hmd4"),
+"fade_out_base": SubResource("Animation_nccft"),
+"fade_out_happy": SubResource("Animation_t7fgk"),
+"fade_out_intro": SubResource("Animation_yx444")
+}
+
+[node name="MusicManager" type="Node2D"]
+script = ExtResource("1_mvd2s")
+
+[node name="BaseMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bd2hb")
+volume_db = -80.0
+
+[node name="HappyMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ydg3y")
+volume_db = -80.0
+
+[node name="Intro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cctv5")
+volume_db = -15.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_igucl")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

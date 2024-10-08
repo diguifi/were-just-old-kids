@@ -11,10 +11,10 @@ extends CharacterBody3D
 @export var jump_velocity : float = 4.5
 @export var mouse_sensitivity : float = 0.1
 @export var immobile : bool = false
-@export var limit_pos_x = 0
-@export var limit_neg_x = 0
-@export var limit_pos_y = 0
-@export var limit_neg_y = 0
+@export var limit_pos_x = 0.0
+@export var limit_neg_x = 0.0
+@export var limit_pos_y = 0.0
+@export var limit_neg_y = 0.0
 @export_file var default_reticle
 
 @export_group("Nodes")

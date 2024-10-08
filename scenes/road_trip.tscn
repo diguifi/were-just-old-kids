@@ -21,9 +21,9 @@ script = ExtResource("1_8ny2n")
 [node name="Character" parent="." instance=ExtResource("1_f66d8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -0.166619)
 immobile = true
-limit_neg_x = -120
-limit_pos_y = 90
-limit_neg_y = -30
+limit_neg_x = -120.0
+limit_pos_y = 90.0
+limit_neg_y = -30.0
 jumping_enabled = false
 crouch_enabled = false
 gravity_enabled = false

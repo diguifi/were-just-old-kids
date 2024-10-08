@@ -9,8 +9,11 @@ var can_press_max_time = 2
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if !end:
+		Globals.level = 0
 
 func _process(delta):
+	set_labels_size()
 	can_press_time += delta
 	if Input.is_action_just_pressed(PAUSE):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -30,3 +33,8 @@ func _input(event):
 			else:
 				if !end:
 					get_tree().change_scene_to_file("res://scenes/road_trip.tscn")
+
+func set_labels_size():
+	var size = get_viewport().get_visible_rect().size
+	label1.size = size
+	label2.size = size

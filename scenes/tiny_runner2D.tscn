@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1e1t8v71kkl0"]
+[gd_scene load_steps=21 format=3 uid="uid://b1e1t8v71kkl0"]
 
 [ext_resource type="Texture2D" uid="uid://lbgx8h2eoma2" path="res://assets/player/player2d.png" id="1_l0ibj"]
 [ext_resource type="Script" path="res://scenes/gameboy_game.gd" id="1_yv4ef"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://xyk345wiahq4" path="res://assets/fonts/pixel.ttf" id="7_0mkfj"]
 [ext_resource type="AudioStream" uid="uid://i1eg26dl1jqs" path="res://assets/sfx/Jump.wav" id="8_j80gl"]
 [ext_resource type="AudioStream" uid="uid://cdda1ann6ahfb" path="res://assets/sfx/Bump.wav" id="9_ucq0r"]
+[ext_resource type="Texture2D" uid="uid://cgpiy0b4bdo7j" path="res://assets/gb/battery.png" id="10_ax5wo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_myiss"]
 atlas = ExtResource("1_l0ibj")
@@ -59,6 +60,28 @@ size = Vector2(11.5714, 14.5714)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3n8h"]
 size = Vector2(0.857141, 10.5714)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0yt2"]
+atlas = ExtResource("10_ax5wo")
+region = Rect2(0, 0, 16, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnjyn"]
+atlas = ExtResource("10_ax5wo")
+region = Rect2(16, 0, 16, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lt4w7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0yt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnjyn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [node name="TinyRunner2D" type="Node2D"]
 script = ExtResource("1_yv4ef")
@@ -131,3 +154,10 @@ volume_db = -15.0
 [node name="Hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_ucq0r")
 volume_db = -15.0
+
+[node name="Battery" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(380, 49)
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_lt4w7")

@@ -60,7 +60,7 @@ func calculate_music_apartment():
 		playing_happy = true
 		fading = true
 		fades_anim.play("fade_in_happy")
-	if !Globals.calculate_looking_at_city() and playing_happy:
+	if (!Globals.calculate_looking_at_city() and playing_happy) and !Globals.sprite_visible:
 		playing_happy = false
 		fading = true
 		fades_anim.play("fade_out_happy")

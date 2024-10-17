@@ -6,6 +6,7 @@ extends Node2D
 @onready var pause_label = $Pause
 @onready var jump_sound = $Jump
 @onready var hurt_sound = $Hurt
+@onready var battery = $Battery
 var jumping = false
 var jump_time = 0
 var max_jump_time = 0.6
@@ -21,14 +22,17 @@ var shader_time = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	sprite.play("default")
+	battery.play("default")
 	height = sprite.sprite_frames.get_frame_texture('default', 0).get_height() * sprite.scale.x
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	handle_pause(delta)
-	if !is_paused:
-		handle_jumping(delta)
-		handle_hurt(delta)
+	handle_battery()
+	if !Globals.gb_off:
+		handle_pause(delta)
+		if !is_paused:
+			handle_jumping(delta)
+			handle_hurt(delta)
 
 func handle_jumping(delta):
 	if Input.is_action_just_pressed("ui_accept") and !jumping:
@@ -78,3 +82,7 @@ func hurt():
 func add_points():
 	points += points_step
 	points_label.text = str(points)
+
+func handle_battery():
+	battery.visible = Globals.low_battery
+	visible = !Globals.gb_off

@@ -35,10 +35,13 @@ reticle_enabled = false
 environment = ExtResource("2_me8cy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0.310047, -0.0728067, 0.947929, -0.392264, 0.898443, 0.197307, 0, 4.28513, -3.48993)
 light_color = Color(1, 0.952941, 0.929412, 1)
 light_energy = 1.5
 shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_fade_start = 0.0
+sky_mode = 1
 
 [node name="Car" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.811, 0.428, 1.51)
@@ -69,5 +72,8 @@ shape = SubResource("BoxShape3D_0y5tn")
 [node name="Spawner" parent="." instance=ExtResource("9_pfc38")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.874, 0, -3.427)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="KeyboardAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_quudc")
+volume_db = -5.0
+
+[connection signal="finished" from="KeyboardAudio" to="." method="_on_keyboard_audio_finished"]

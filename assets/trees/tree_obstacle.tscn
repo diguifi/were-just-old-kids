@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://cbj3sa4higmim"]
 
 [ext_resource type="ArrayMesh" uid="uid://l52lbtnqjt5h" path="res://assets/trees/tree.obj" id="1_jfvx5"]
-[ext_resource type="Shader" path="res://assets/bushes/bush_wind.gdshader" id="2_evwi3"]
+[ext_resource type="Shader" uid="uid://b5c67kxs7p8id" path="res://assets/bushes/bush_wind.gdshader" id="2_evwi3"]
 [ext_resource type="Texture2D" uid="uid://bkohv1qjq5s83" path="res://assets/trees/simple_pine_leaves/simple_pin_leaves_albedo.png" id="3_mgf74"]
 [ext_resource type="Texture2D" uid="uid://ctt3orpnvqw7" path="res://assets/trees/simple_pine_leaves/simple_pin_leaves_normal.png" id="4_gpv5b"]
 [ext_resource type="Texture2D" uid="uid://b3j82svml7tsy" path="res://assets/trees/simple_pine_leaves/simple_pin_leaves_orm.png" id="5_snhq3"]
 [ext_resource type="Material" uid="uid://b5wxyxkrs33pc" path="res://assets/trees/simple_bark/simple_bark.tres" id="6_pdqpd"]
-[ext_resource type="Script" path="res://managers/obstacle.gd" id="7_o0h06"]
+[ext_resource type="Script" uid="uid://c7dt484q1lfsr" path="res://managers/obstacle.gd" id="7_o0h06"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sn0gq"]
 fractal_octaves = 1

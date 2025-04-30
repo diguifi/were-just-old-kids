@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwd4f1bgsqoqi"]
 
-[ext_resource type="Script" path="res://scenes/chunks/chunk.gd" id="1_t7oli"]
+[ext_resource type="Script" uid="uid://c7drs4mmp4afb" path="res://scenes/chunks/chunk.gd" id="1_t7oli"]
 [ext_resource type="PackedScene" uid="uid://ce3e4kddknqnx" path="res://assets/bushes/bush_obstacle.tscn" id="2_omco5"]
 [ext_resource type="PackedScene" uid="uid://cbj3sa4higmim" path="res://assets/trees/tree_obstacle.tscn" id="3_nuxi1"]
 

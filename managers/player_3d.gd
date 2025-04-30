@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var animation = $AnimationPlayer
 @onready var jump_audio = $Jump
 @onready var hurt_audio = $Hurt
+@onready var animation_outline = $OutlinePulser
 @export var jump_velocity : float = 6
 @export var hurt_time = 1.5
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -14,9 +15,16 @@ var hurt_count = 0
 var just_released = false
 var just_appeared = false
 var alive = false
+var looked_one_time = false
+var did_look_one_time = false
+var time_to_show_outline = 1
+var pulse_anim
 
 func _ready():
-	visible = false
+	pulse_anim = animation_outline.get_animation("pulse")
+	animation_outline.play("pulse")
+	animation_outline.stop()
+	sprite_anim.visible = false
 	starting_x = global_transform.origin.x
 	sprite_anim.play("walk")
 
@@ -36,10 +44,25 @@ func _physics_process(delta):
 	was_on_floor = is_on_floor()
 	
 func handle_birth():
+	handle_outline()
 	if !just_appeared and Globals.sprite_visible:
-		visible = true
+		sprite_anim.visible = true
 		just_appeared = true
 		animation.play("appear")
+		
+func handle_outline():
+	if !alive and Globals.time_looking_at_sprite >= time_to_show_outline:
+		if !looked_one_time:
+			did_look_one_time = true
+		else:
+			if pulse_anim.loop_mode == 0:
+				pulse_anim.set_loop_mode(1)
+				animation_outline.play("pulse")
+	else:
+		looked_one_time = did_look_one_time
+		if looked_one_time and pulse_anim.loop_mode == 1:
+			pulse_anim.set_loop_mode(0)
+			animation_outline.play_backwards("pulse")
 
 func handle_jumping():
 	if Input.is_action_pressed("ui_accept") and is_on_floor():
@@ -59,11 +82,11 @@ func handle_jumping():
 func handle_hurt(delta):
 	if alive and is_hurt:
 		if Engine.get_frames_drawn() % 2 == 0:
-			visible = !visible
+			sprite_anim.visible = !sprite_anim.visible
 		hurt_count += delta
 		if hurt_count >= hurt_time:
 			is_hurt = false
-			visible = true
+			sprite_anim.visible = true
 			sprite_anim.play("walk")
 
 func hurt():

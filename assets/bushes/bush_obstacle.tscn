@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://ce3e4kddknqnx"]
 
-[ext_resource type="Shader" path="res://assets/bushes/bush_wind.gdshader" id="1_ui7vv"]
+[ext_resource type="Shader" uid="uid://b5c67kxs7p8id" path="res://assets/bushes/bush_wind.gdshader" id="1_ui7vv"]
 [ext_resource type="Texture2D" uid="uid://dap2afqj737q5" path="res://assets/simple_leaves/simple_leaves_albedo.png" id="2_o43q7"]
 [ext_resource type="Texture2D" uid="uid://cu1fm3jggdcgv" path="res://assets/simple_leaves/simple_leaves_normal.png" id="3_nfljx"]
 [ext_resource type="Texture2D" uid="uid://ovrmwwayytuc" path="res://assets/simple_leaves/simple_leaves_orm.png" id="4_306d6"]
 [ext_resource type="ArrayMesh" uid="uid://dbvyvmrfv7b41" path="res://assets/bushes/bush.obj" id="5_cxjh5"]
-[ext_resource type="Script" path="res://managers/obstacle.gd" id="6_r8adn"]
+[ext_resource type="Script" uid="uid://c7dt484q1lfsr" path="res://managers/obstacle.gd" id="6_r8adn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_rfln0"]
 fractal_octaves = 1

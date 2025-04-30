@@ -1,7 +1,6 @@
 extends Node3D
 
 @onready var audio_notification = $AudioStreamPlayer
-var time_looking_at_sprite = 0
 var time_to_show_sprite = 5
 
 func _ready() -> void:
@@ -15,8 +14,8 @@ func _physics_process(delta: float) -> void:
 func calculate_looking_at_sprite(delta):
 	if !Globals.sprite_visible:
 		if Globals.calculate_looking_at_city():
-			time_looking_at_sprite+=delta
-			if time_looking_at_sprite >= time_to_show_sprite:
+			Globals.time_looking_at_sprite2+=delta
+			if Globals.time_looking_at_sprite2 >= time_to_show_sprite:
 				Globals.sprite_visible = true
 		else:
-			time_looking_at_sprite = 0
+			Globals.time_looking_at_sprite2 = 0

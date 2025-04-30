@@ -2,7 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://cipynj3lbonya" path="res://assets/gb/gb3.obj" id="1_34sue"]
 [ext_resource type="Texture2D" uid="uid://iw4c2dusmbel" path="res://assets/gb/albedo.png" id="2_jjcvp"]
-[ext_resource type="Script" path="res://managers/game_boy.gd" id="3_56ic4"]
+[ext_resource type="Script" uid="uid://dwmsgp1dm7ve4" path="res://managers/game_boy.gd" id="3_56ic4"]
 [ext_resource type="PackedScene" uid="uid://b1e1t8v71kkl0" path="res://scenes/tiny_runner2D.tscn" id="3_ippbo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vpyl"]
@@ -43,8 +43,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mofa1"]
 _data = {
-"RESET": SubResource("Animation_vla8w"),
-"aproximar": SubResource("Animation_fyo75")
+&"RESET": SubResource("Animation_vla8w"),
+&"aproximar": SubResource("Animation_fyo75")
 }
 
 [node name="GameBoy" type="MeshInstance3D"]

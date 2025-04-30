@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwtawjglbqmcm"]
 
-[ext_resource type="Script" path="res://managers/main.gd" id="1_pwrtf"]
+[ext_resource type="Script" uid="uid://8rd1gdalhbbp" path="res://managers/main.gd" id="1_pwrtf"]
 [ext_resource type="FontFile" uid="uid://ced8qdp2stci1" path="res://assets/fonts/Philosopher-Regular.ttf" id="2_p5gns"]
 
 [node name="End" type="Node2D"]

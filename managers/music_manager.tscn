@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://drt2ivbk6vpwg"]
 
-[ext_resource type="Script" path="res://managers/music_manager.gd" id="1_mvd2s"]
+[ext_resource type="Script" uid="uid://b67bk0ruwl477" path="res://managers/music_manager.gd" id="1_mvd2s"]
 [ext_resource type="AudioStream" uid="uid://b1f0wtfr35ob7" path="res://assets/sfx/base_music2.wav" id="2_bd2hb"]
 [ext_resource type="AudioStream" uid="uid://beosk8tub7s66" path="res://assets/sfx/happy_music2.wav" id="3_ydg3y"]
 [ext_resource type="AudioStream" uid="uid://bavo331nky60u" path="res://assets/sfx/intro.wav" id="4_cctv5"]
@@ -126,12 +126,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_igucl"]
 _data = {
-"RESET": SubResource("Animation_501dx"),
-"fade_in_base": SubResource("Animation_4jjtb"),
-"fade_in_happy": SubResource("Animation_3hmd4"),
-"fade_out_base": SubResource("Animation_nccft"),
-"fade_out_happy": SubResource("Animation_t7fgk"),
-"fade_out_intro": SubResource("Animation_yx444")
+&"RESET": SubResource("Animation_501dx"),
+&"fade_in_base": SubResource("Animation_4jjtb"),
+&"fade_in_happy": SubResource("Animation_3hmd4"),
+&"fade_out_base": SubResource("Animation_nccft"),
+&"fade_out_happy": SubResource("Animation_t7fgk"),
+&"fade_out_intro": SubResource("Animation_yx444")
 }
 
 [node name="MusicManager" type="Node2D"]

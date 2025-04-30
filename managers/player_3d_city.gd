@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export_node_path("CharacterBody3D") var player_path
 @onready var anim = $AnimatedSprite3D
 @onready var animator = $AnimationPlayer
+@onready var animation_outline = $OutlinePulser
 var distance_to_player = 1
 
 const SPEED = 5.0
@@ -14,11 +15,16 @@ var appearing = false
 var appeared = false
 var touched_wall_last_time = false
 var custom_is_on_wall = false
+var time_to_show_outline = 1
+var pulse_anim
 
 func _ready() -> void:
+	pulse_anim = animation_outline.get_animation("pulse2")
+	animation_outline.play("pulse2")
+	animation_outline.stop()
 	anim.play("default")
 	initial_position = position
-	visible = false
+	anim.visible = false
 
 func _physics_process(delta: float) -> void:
 	appear()
@@ -92,11 +98,22 @@ func calculate_goal():
 		Globals.goal.go_to_next_position()
 
 func appear():
+	handle_outline()
 	if Globals.sprite_visible and !appearing:
 		appearing = true
-		visible = true
+		anim.visible = true
 	if appearing and !appeared and !animator.is_playing():
 		animator.play("appear")
+		
+func handle_outline():
+	if !appeared and Globals.time_looking_at_sprite2 >= time_to_show_outline:
+		if pulse_anim.loop_mode == 0:
+			pulse_anim.set_loop_mode(1)
+			animation_outline.play("pulse2")
+	else:
+		if pulse_anim.loop_mode == 1:
+			pulse_anim.set_loop_mode(0)
+			animation_outline.play_backwards("pulse2")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	appeared = true

@@ -1,10 +1,10 @@
 [gd_scene load_steps=21 format=3 uid="uid://b1e1t8v71kkl0"]
 
 [ext_resource type="Texture2D" uid="uid://lbgx8h2eoma2" path="res://assets/player/player2d.png" id="1_l0ibj"]
-[ext_resource type="Script" path="res://scenes/gameboy_game.gd" id="1_yv4ef"]
+[ext_resource type="Script" uid="uid://qqlm10eptlr2" path="res://scenes/gameboy_game.gd" id="1_yv4ef"]
 [ext_resource type="Texture2D" uid="uid://jwe3hgyldfu1" path="res://assets/player/background.png" id="2_s0lec"]
 [ext_resource type="Material" uid="uid://cp5rfnvbklw8j" path="res://assets/player/scroll.tres" id="2_twtk0"]
-[ext_resource type="Script" path="res://managers/tiny_spawner2D.gd" id="5_lgake"]
+[ext_resource type="Script" uid="uid://cttybmijx7smc" path="res://managers/tiny_spawner2D.gd" id="5_lgake"]
 [ext_resource type="PackedScene" uid="uid://61ur8p3o8ifj" path="res://managers/tiny_obstacle.tscn" id="6_yrpxi"]
 [ext_resource type="FontFile" uid="uid://xyk345wiahq4" path="res://assets/fonts/pixel.ttf" id="7_0mkfj"]
 [ext_resource type="AudioStream" uid="uid://i1eg26dl1jqs" path="res://assets/sfx/Jump.wav" id="8_j80gl"]

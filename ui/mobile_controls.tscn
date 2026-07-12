@@ -1,0 +1,169 @@
+[gd_scene load_steps=9 format=3 uid="uid://bq8mobilecontrols1"]
+
+[ext_resource type="Script" path="res://ui/mobile_controls.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy_normal"]
+bg_color = Color(1, 1, 1, 0.12)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.28)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy_pressed"]
+bg_color = Color(1, 1, 1, 0.18)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.38)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tip_normal"]
+bg_color = Color(1, 1, 1, 0.22)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tip_pressed"]
+bg_color = Color(1, 1, 1, 0.32)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.5)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jump_normal"]
+bg_color = Color(1, 1, 1, 0.14)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.32)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jump_pressed"]
+bg_color = Color(1, 1, 1, 0.28)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.45)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jump_hover"]
+bg_color = Color(1, 1, 1, 0.18)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.38)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+
+[node name="MobileControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="MoveJoystick" type="VirtualJoystick" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -360.0
+offset_right = 360.0
+offset_bottom = -12.0
+grow_vertical = 0
+theme_override_styles/normal_joystick = SubResource("StyleBoxFlat_joy_normal")
+theme_override_styles/pressed_joystick = SubResource("StyleBoxFlat_joy_pressed")
+theme_override_styles/normal_tip = SubResource("StyleBoxFlat_tip_normal")
+theme_override_styles/pressed_tip = SubResource("StyleBoxFlat_tip_pressed")
+joystick_mode = 1
+deadzone_ratio = 0.05
+joystick_size = 180.0
+tip_size = 90.0
+action_left = &"ui_left"
+action_right = &"ui_right"
+action_up = &"ui_up"
+action_down = &"ui_down"
+
+[node name="LookJoystick" type="VirtualJoystick" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -360.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal_joystick = SubResource("StyleBoxFlat_joy_normal")
+theme_override_styles/pressed_joystick = SubResource("StyleBoxFlat_joy_pressed")
+theme_override_styles/normal_tip = SubResource("StyleBoxFlat_tip_normal")
+theme_override_styles/pressed_tip = SubResource("StyleBoxFlat_tip_pressed")
+joystick_mode = 1
+deadzone_ratio = 0.05
+joystick_size = 180.0
+tip_size = 90.0
+action_left = &"look_left"
+action_right = &"look_right"
+action_up = &"look_up"
+action_down = &"look_down"
+
+[node name="JumpButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -500.0
+offset_right = -120.0
+offset_bottom = -380.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.55)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.75)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_jump_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jump_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jump_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jump_normal")
+text = "A"

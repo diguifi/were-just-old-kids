@@ -45,14 +45,17 @@ func _physics_process(delta: float) -> void:
 			velocity.y = current_jump_velocity
 
 		# Get the input direction and handle the movement/deceleration.
+		# Use thresholds (not == ±1) so analog VirtualJoystick input works; keyboard still hits full strength.
 		var direction
 		var input_dir := Input.get_vector("ui_left", "ui_right", "none", "none")
+		var moving_right := input_dir.x > 0.08
+		var moving_left := input_dir.x < -0.08
 		
-		calculate_is_on_wall(input_dir.x == 1)
+		calculate_is_on_wall(moving_right)
 		
-		if input_dir.x == 1 and Globals.goal and (!custom_is_on_wall or !is_on_floor()):
+		if moving_right and Globals.goal and (!custom_is_on_wall or !is_on_floor()):
 			direction = global_position.direction_to(Globals.goal.global_transform.origin)
-		if input_dir.x == -1 and Globals.goal and (!custom_is_on_wall or !is_on_floor()):
+		if moving_left and Globals.goal and (!custom_is_on_wall or !is_on_floor()):
 			direction = global_position.direction_to(Globals.goal.previous_goal)
 			
 		if direction:

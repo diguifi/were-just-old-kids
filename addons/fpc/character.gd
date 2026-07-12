@@ -36,11 +36,11 @@ extends CharacterBody3D
 @export var CROUCH : String
 @export var SPRINT : String
 
-# Uncomment if you want full controller support
-#@export var LOOK_LEFT : String
-#@export var LOOK_RIGHT : String
-#@export var LOOK_UP : String
-#@export var LOOK_DOWN : String
+@export var LOOK_LEFT : String = "look_left"
+@export var LOOK_RIGHT : String = "look_right"
+@export var LOOK_UP : String = "look_up"
+@export var LOOK_DOWN : String = "look_down"
+@export var look_stick_sensitivity: float = 120.0 # degrees per second at full tilt
 
 @export_group("Feature Settings")
 @export var city_level : bool = false
@@ -73,8 +73,17 @@ var RETICLE : Control
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity") # Don't set this as a const, see the gravity section in _physics_process
 
 
+func _is_mobile() -> bool:
+	if OS.has_feature("mobile") or OS.has_feature("android") or OS.has_feature("ios"):
+		return true
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		return true
+	return false
+
+
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if not _is_mobile():
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	HEAD.rotation = rotation
 	rotation = Vector3.ZERO
@@ -319,12 +328,20 @@ func _process(delta):
 		status += " in the air"
 	$UserInterface/DebugPanel.add_property("State", status, 4)
 	
-	if pausing_enabled:
+	if pausing_enabled and not _is_mobile():
 		if Input.is_action_just_pressed(PAUSE):
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+	# Stick look (controller / VirtualJoystick) — apply before clamps so limits apply same frame
+	if InputMap.has_action(LOOK_LEFT) and InputMap.has_action(LOOK_RIGHT) \
+			and InputMap.has_action(LOOK_UP) and InputMap.has_action(LOOK_DOWN):
+		var look := Input.get_vector(LOOK_LEFT, LOOK_RIGHT, LOOK_UP, LOOK_DOWN)
+		if look != Vector2.ZERO:
+			HEAD.rotation_degrees.y -= look.x * look_stick_sensitivity * delta
+			HEAD.rotation_degrees.x -= look.y * look_stick_sensitivity * delta
 
 	if limit_pos_y != 0 or limit_neg_y != 0:
 		HEAD.rotation.x = clamp(HEAD.rotation.x, deg_to_rad(limit_neg_y), deg_to_rad(limit_pos_y))
@@ -333,19 +350,18 @@ func _process(delta):
 	if limit_pos_x != 0 or limit_neg_x != 0:
 		HEAD.rotation.y = clamp(HEAD.rotation.y, deg_to_rad(limit_neg_x), deg_to_rad(limit_pos_x))
 	Globals.road_trip_head_rotation = HEAD.rotation
-	
-	# Uncomment if you want full controller support
-	#var controller_view_rotation = Input.get_vector(LOOK_LEFT, LOOK_RIGHT, LOOK_UP, LOOK_DOWN)
-	#HEAD.rotation_degrees.y -= controller_view_rotation.x * 1.5
-	#HEAD.rotation_degrees.x -= controller_view_rotation.y * 1.5
 
 
 func _unhandled_input(event):
+	if _is_mobile():
+		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		HEAD.rotation_degrees.y -= event.relative.x * mouse_sensitivity
 		HEAD.rotation_degrees.x -= event.relative.y * mouse_sensitivity
 
 func _input(event):
+	if _is_mobile():
+		return
 	if event is InputEventMouseButton:
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
